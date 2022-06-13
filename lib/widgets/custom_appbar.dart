@@ -16,12 +16,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Text(
           title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Avenir',
-            color: Colors.white,
-          ),
+          style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white),
         ),
       ),
       iconTheme: const IconThemeData(
@@ -29,7 +24,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/wishlist');
+          },
           icon: const Icon(
             Icons.favorite,
           ),

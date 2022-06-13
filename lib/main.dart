@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/config/app_router.dart';
+import 'package:flutter_ecommerce_app/config/theme.dart';
 import 'screens/screens.dart';
 
 
@@ -16,9 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter eEcommerce',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: theme(),
       onGenerateRoute: AppRoute.onGenerateRoute,
       initialRoute: HomeScreen.routeName,
     );
