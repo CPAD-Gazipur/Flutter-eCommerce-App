@@ -19,7 +19,7 @@ class ProductCarousel extends StatelessWidget {
           );
         },
         padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        itemCount: Product.products.length,
+        itemCount: products.length,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
       ),
