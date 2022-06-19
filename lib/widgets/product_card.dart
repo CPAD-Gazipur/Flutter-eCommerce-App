@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/bloc/wishlist/wishlist_bloc.dart';
 import '../models/model.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
   final double widthFactor;
-  const ProductCard({Key? key, required this.product, this.widthFactor = 2.5})
-      : super(key: key);
+  final double leftPosition;
+  final bool isWishList;
+
+  const ProductCard({
+    Key? key,
+    required this.product,
+    this.widthFactor = 2.5,
+    this.leftPosition = 0,
+    this.isWishList = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +41,10 @@ class ProductCard extends StatelessWidget {
             ),
             Positioned(
               top: 60,
+              left: leftPosition,
               child: Container(
-                width: MediaQuery.of(context).size.width / widthFactor,
+                width: MediaQuery.of(context).size.width / widthFactor -
+                    leftPosition,
                 height: 80,
                 decoration: BoxDecoration(
                   color: Colors.black.withAlpha(50),
@@ -42,9 +54,10 @@ class ProductCard extends StatelessWidget {
             ),
             Positioned(
               top: 65,
-              left: 5,
+              left: leftPosition + 5,
               child: Container(
-                width: MediaQuery.of(context).size.width / widthFactor - 10,
+                width: (MediaQuery.of(context).size.width / widthFactor - 10) -
+                    leftPosition,
                 height: 70,
                 decoration: BoxDecoration(
                     color: Colors.black.withAlpha(150),
@@ -88,6 +101,29 @@ class ProductCard extends StatelessWidget {
                           ),
                         ),
                       ),
+                      isWishList
+                          ? BlocBuilder<WishlistBloc, WishlistState>(
+                              builder: (context, state) {
+                              return Expanded(
+                                child: IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<WishlistBloc>()
+                                        .add(RemoveWishListProduct(product));
+                                    const snackBar = SnackBar(
+                                        content: Text(
+                                            'Remove Item From Your WishList'));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            })
+                          : const SizedBox(),
                     ],
                   ),
                 ),
