@@ -3,31 +3,37 @@ import '../extension/extension.dart';
 import '../models/model.dart';
 
 class HeroCarouselCard extends StatelessWidget {
-  final Category category;
+  final Category? category;
+  final Product? product;
 
   const HeroCarouselCard({
     Key? key,
-    required this.category,
+    this.category,
+    this.product,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/catalog',
-          arguments: category,
-        );
+        if (product == null) {
+          Navigator.pushNamed(
+            context,
+            '/catalog',
+            arguments: category,
+          );
+        }
       },
       child: Container(
         margin: const EdgeInsets.all(5.0),
         child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             child: Stack(
               children: <Widget>[
-                Image.network(category.imageUrl,
-                    fit: BoxFit.cover, width: 1000.0),
+                Image.network(
+                    product == null ? category!.imageUrl : product!.imageUrl,
+                    fit: BoxFit.cover,
+                    width: 1000.0),
                 Positioned(
                   bottom: 0.0,
                   left: 0.0,
@@ -48,7 +54,7 @@ class HeroCarouselCard extends StatelessWidget {
                       horizontal: 20.0,
                     ),
                     child: Text(
-                      category.name.toCapitalized(),
+                      product == null ? category!.name.toCapitalized() : '',
                       style: Theme.of(context)
                           .textTheme
                           .headline2!

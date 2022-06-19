@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce_app/extension/extension.dart';
 import 'package:flutter_ecommerce_app/models/model.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
-import '../../widgets/custom_appbar.dart';
 
 class CatalogScreen extends StatelessWidget {
   static const String routeName = '/catalog';
