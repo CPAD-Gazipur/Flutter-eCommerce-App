@@ -46,6 +46,16 @@ class WishListScreen extends StatelessWidget {
                       'No Item in you Wishlist',
                       style: Theme.of(context).textTheme.bodyText1!,
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.black),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: const Text('Go For Shopping'),
+                    ),
                   ],
                 ),
               );
