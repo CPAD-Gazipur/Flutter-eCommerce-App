@@ -1,9 +1,13 @@
 import 'package:equatable/equatable.dart';
-
 import 'model.dart';
 
 class Cart extends Equatable {
-  const Cart();
+  final List<Product> products;
+
+  const Cart({this.products = const <Product>[]});
+
+  @override
+  List<Object?> get props => [products];
 
   final double freeDeliveryLimit = 100.0;
 
@@ -39,58 +43,4 @@ class Cart extends Equatable {
 
   String get totalPriceString =>
       totalPrice(subTotalPrice, deliveryFee).toStringAsFixed(2);
-
-  static List<Product> products = [
-    /*const Product(
-      name: 'Samsung Universe 9',
-      category: 'smartphones',
-      imageUrl: 'https://dummyjson.com/image/i/products/3/thumbnail.jpg',
-      price: 1249,
-      isRecommended: true,
-      isPopular: false,
-    ),
-    const Product(
-      name: 'Huawei P30',
-      category: 'smartphones',
-      imageUrl: 'https://dummyjson.com/image/i/products/5/thumbnail.jpg',
-      price: 499,
-      isRecommended: true,
-      isPopular: false,
-    ),
-    const Product(
-      name: 'Microsoft Surface Laptop 4',
-      category: 'laptops',
-      imageUrl: 'https://dummyjson.com/image/i/products/8/thumbnail.jpg',
-      price: 1499,
-      isRecommended: false,
-      isPopular: true,
-    ),*/
-    const Product(
-      name: 'Perfume Oil',
-      category: 'fragrances',
-      imageUrl: 'https://dummyjson.com/image/i/products/11/thumbnail.jpg',
-      price: 13,
-      isRecommended: false,
-      isPopular: true,
-    ),
-    const Product(
-      name: 'Brown Perfume',
-      category: 'fragrances',
-      imageUrl: 'https://dummyjson.com/image/i/products/12/thumbnail.jpg',
-      price: 40,
-      isRecommended: true,
-      isPopular: false,
-    ),
-    const Product(
-      name: 'Hyaluronic Acid Serum',
-      category: 'skincare',
-      imageUrl: 'https://dummyjson.com/image/i/products/16/thumbnail.jpg',
-      price: 19,
-      isRecommended: false,
-      isPopular: true,
-    ),
-  ];
-
-  @override
-  List<Object?> get props => [];
 }

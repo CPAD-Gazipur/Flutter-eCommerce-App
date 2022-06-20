@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/bloc/cart/cart_bloc.dart';
 
 import '../models/model.dart';
 
@@ -13,15 +15,21 @@ class CartProductCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.03),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
           children: [
-            Image.network(
-              product.imageUrl,
-              height: 80,
-              width: 100,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ),
+              child: Image.network(
+                product.imageUrl,
+                height: 80,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
               width: 10,
@@ -48,18 +56,28 @@ class CartProductCard extends StatelessWidget {
             ),
             Row(
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove_circle),
-                ),
+                BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      context
+                          .read<CartBloc>()
+                          .add(RemoveProductFromCart(product));
+                    },
+                    icon: const Icon(Icons.remove_circle),
+                  );
+                }),
                 Text(
                   '1',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.add_circle),
-                ),
+                BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      context.read<CartBloc>().add(AddProductToCart(product));
+                    },
+                    icon: const Icon(Icons.add_circle),
+                  );
+                }),
               ],
             )
           ],

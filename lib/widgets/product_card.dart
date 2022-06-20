@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/bloc/cart/cart_bloc.dart';
 import 'package:flutter_ecommerce_app/bloc/wishlist/wishlist_bloc.dart';
 import '../models/model.dart';
 
@@ -92,14 +93,41 @@ class ProductCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add_circle,
-                            color: Colors.white,
-                          ),
-                        ),
+                      BlocBuilder<CartBloc, CartState>(
+                        builder: (context, state) {
+                          if (state is CartLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator.adaptive(),
+                            );
+                          } else if (state is CartLoaded) {
+                            return Expanded(
+                              child: IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<CartBloc>()
+                                      .add(AddProductToCart(product));
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: const Text('Added to Cart'),
+                                      action: SnackBarAction(
+                                        label: 'CartList',
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, '/cart');
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(
+                                  Icons.add_circle,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          } else {
+                            return const Text('Something went wrong');
+                          }
+                        },
                       ),
                       isWishList
                           ? BlocBuilder<WishlistBloc, WishlistState>(
