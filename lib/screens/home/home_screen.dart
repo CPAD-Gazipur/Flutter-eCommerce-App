@@ -37,7 +37,9 @@ class HomeScreen extends StatelessWidget {
                     ))
                 .toList(),
           ),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           const SectionTitle(title: 'RECOMMENDED'),
           ProductCarousel(
             products: Product.products
@@ -46,9 +48,8 @@ class HomeScreen extends StatelessWidget {
           ),
           const SectionTitle(title: 'MOST POPULAR'),
           ProductCarousel(
-            products: Product.products
-                .where((product) => product.isPopular)
-                .toList(),
+            products:
+                Product.products.where((product) => product.isPopular).toList(),
           ),
         ],
       ),
