@@ -9,6 +9,20 @@ class Cart extends Equatable {
   @override
   List<Object?> get props => [products];
 
+  Map productQuantity(products) {
+    dynamic quantity = {};
+
+    products.forEach((product) {
+      if (!quantity.containsKey(product)) {
+        quantity[product] = 1;
+      } else {
+        quantity[product] += 1;
+      }
+    });
+
+    return quantity;
+  }
+
   final double freeDeliveryLimit = 100.0;
 
   double get subTotalPrice => products.fold(
