@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomNavBar extends StatelessWidget {
-  const CustomNavBar({Key? key}) : super(key: key);
+import '../bloc/cart/cart_bloc.dart';
+import '../bloc/wishlist/wishlist_bloc.dart';
+import '../models/model.dart';
+
+class HomeNavBar extends StatelessWidget {
+  const HomeNavBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +45,107 @@ class CustomNavBar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AddToCartNavBar extends StatelessWidget {
+  const AddToCartNavBar({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Colors.black,
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.share,
+                  color: Colors.white,
+                )),
+            BlocBuilder<WishlistBloc, WishlistState>(builder: (context, state) {
+              return IconButton(
+                  onPressed: () {
+                    context
+                        .read<WishlistBloc>()
+                        .add(AddWishListProduct(product));
+                    var snackBar = SnackBar(
+                      content: const Text('Added To Your WishList'),
+                      action: SnackBarAction(
+                          label: 'Wishlist',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/wishlist');
+                          }),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ));
+            }),
+            BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+              return ElevatedButton(
+                  onPressed: () {
+                    context.read<CartBloc>().add(AddProductToCart(product));
+                    var snackBar = SnackBar(
+                      content: const Text('Added To Cart'),
+                      action: SnackBarAction(
+                          label: 'CartList',
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/cart');
+                          }),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  },
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  child: Text(
+                    'ADD TO CART',
+                    style: Theme.of(context).textTheme.headline3,
+                  ));
+            })
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class GoToCheckoutNavBar extends StatelessWidget {
+  const GoToCheckoutNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Colors.black,
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/checkout');
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.white),
+                child: Text(
+                  'GO TO CHECKOUT',
+                  style: Theme.of(context).textTheme.headline3,
+                ))
           ],
         ),
       ),

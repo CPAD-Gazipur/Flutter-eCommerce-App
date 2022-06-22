@@ -24,65 +24,7 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: product.name),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.black,
-        child: SizedBox(
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.share,
-                    color: Colors.white,
-                  )),
-              BlocBuilder<WishlistBloc, WishlistState>(
-                  builder: (context, state) {
-                return IconButton(
-                    onPressed: () {
-                      context
-                          .read<WishlistBloc>()
-                          .add(AddWishListProduct(product));
-                      var snackBar = SnackBar(
-                        content: const Text('Added To Your WishList'),
-                        action: SnackBarAction(
-                            label: 'Wishlist',
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/wishlist');
-                            }),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
-                    icon: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                    ));
-              }),
-              BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-                return ElevatedButton(
-                    onPressed: () {
-                      context.read<CartBloc>().add(AddProductToCart(product));
-                      var snackBar = SnackBar(
-                        content: const Text('Added To Cart'),
-                        action: SnackBarAction(
-                            label: 'CartList',
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/cart');
-                            }),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
-                    child: Text(
-                      'ADD TO CART',
-                      style: Theme.of(context).textTheme.headline3,
-                    ));
-              })
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar: AddToCartNavBar(product: product),
       body: ListView(
         children: [
           CarouselSlider(

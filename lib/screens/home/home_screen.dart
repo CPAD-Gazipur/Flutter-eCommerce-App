@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'cCommerce App',
       ),
-      bottomNavigationBar: const CustomNavBar(),
+      bottomNavigationBar: const HomeNavBar(),
       body: Column(
         children: [
           BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
