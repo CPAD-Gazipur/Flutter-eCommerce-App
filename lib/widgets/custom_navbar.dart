@@ -152,3 +152,31 @@ class GoToCheckoutNavBar extends StatelessWidget {
     );
   }
 }
+
+class OrderNowNavBar extends StatelessWidget {
+  const OrderNowNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Colors.black,
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(primary: Colors.white),
+                child: Text(
+                  'ORDER NOW',
+                  style: Theme.of(context).textTheme.headline3,
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+}
