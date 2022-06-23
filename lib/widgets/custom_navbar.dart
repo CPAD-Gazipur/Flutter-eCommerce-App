@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/bloc/checkout/checkout_bloc.dart';
 
 import '../bloc/cart/cart_bloc.dart';
 import '../bloc/wishlist/wishlist_bloc.dart';
@@ -167,13 +168,33 @@ class OrderNowNavBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                child: Text(
-                  'ORDER NOW',
-                  style: Theme.of(context).textTheme.headline3,
-                ))
+            BlocBuilder<CheckoutBloc, CheckoutState>(builder: (context, state) {
+              if (state is CheckoutLoading) {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                );
+              }
+              if (state is CheckoutLoaded) {
+                return ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<CheckoutBloc>()
+                          .add(ConfirmCheckout(checkout: state.checkout));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Order Confirmed')));
+                      debugPrint('Hello');
+                    },
+                    style: ElevatedButton.styleFrom(primary: Colors.white),
+                    child: Text(
+                      'ORDER NOW',
+                      style: Theme.of(context).textTheme.headline3,
+                    ));
+              } else {
+                return const Center(
+                  child: Text('Something went wrong...'),
+                );
+              }
+            })
           ],
         ),
       ),
