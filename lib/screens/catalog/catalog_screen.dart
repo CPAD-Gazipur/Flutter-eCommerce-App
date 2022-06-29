@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/product/product_bloc.dart';
 import 'package:flutter_ecommerce_app/extension/extension.dart';
 import 'package:flutter_ecommerce_app/models/model.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
+
+import '../../bloc/blocs.dart';
 
 class CatalogScreen extends StatelessWidget {
   static const String routeName = '/catalog';

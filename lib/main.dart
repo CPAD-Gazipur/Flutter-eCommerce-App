@@ -1,12 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/cart/cart_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/category/category_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/checkout/checkout_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/product/product_bloc.dart';
-import 'package:flutter_ecommerce_app/bloc/wishlist/wishlist_bloc.dart';
-import 'package:flutter_ecommerce_app/repositories/repositories.dart';
+import 'repositories/repositories.dart';
+import 'bloc/blocs.dart';
 import 'config/config.dart';
 import 'screens/screens.dart';
 
