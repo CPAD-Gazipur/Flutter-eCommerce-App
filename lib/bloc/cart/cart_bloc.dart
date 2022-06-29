@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
 import '../../models/model.dart';
 
 part 'cart_event.dart';
@@ -10,13 +9,13 @@ part 'cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartLoading()) {
-    on<CardStated>(_onLoadCart);
+    on<LoadCart>(_onLoadCart);
     on<AddProductToCart>(_onAddProduct);
     on<RemoveProductFromCart>(_onRemoveProduct);
   }
 
   void _onLoadCart(
-    CardStated event,
+    LoadCart event,
     Emitter<CartState> emit,
   ) async {
     emit(CartLoading());

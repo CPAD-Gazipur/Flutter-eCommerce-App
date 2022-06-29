@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => WishlistBloc()..add(StartWishList())),
-        BlocProvider(create: (_) => CartBloc()..add(CardStated())),
+        BlocProvider(create: (_) => CartBloc()..add(LoadCart())),
         BlocProvider(
           create: (context) => CheckoutBloc(
             cartBloc: context.read<CartBloc>(),
