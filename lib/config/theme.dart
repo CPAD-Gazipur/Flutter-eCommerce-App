@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ThemeData theme(){
+ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: 'Avenir',
@@ -8,7 +8,7 @@ ThemeData theme(){
   );
 }
 
-TextTheme textTheme(){
+TextTheme textTheme() {
   return const TextTheme(
     headline1: TextStyle(
       color: Colors.black,
@@ -17,7 +17,7 @@ TextTheme textTheme(){
     ),
     headline2: TextStyle(
       color: Colors.black,
-      fontSize: 24,
+      fontSize: 22,
       fontWeight: FontWeight.bold,
     ),
     headline3: TextStyle(

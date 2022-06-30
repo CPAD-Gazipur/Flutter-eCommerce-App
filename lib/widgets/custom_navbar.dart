@@ -179,7 +179,8 @@ class OrderNowNavBar extends StatelessWidget {
                           .add(ConfirmCheckout(checkout: state.checkout));
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Order Confirmed')));
-                      debugPrint('Hello');
+
+                      Navigator.pushNamed(context, '/order-confirmation');
                     },
                     style: ElevatedButton.styleFrom(primary: Colors.white),
                     child: Text(
@@ -192,6 +193,37 @@ class OrderNowNavBar extends StatelessWidget {
                 );
               }
             })
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BackToShoppingNavBar extends StatelessWidget {
+  const BackToShoppingNavBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: Colors.black,
+      child: SizedBox(
+        height: 70,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/');
+              },
+              style: ElevatedButton.styleFrom(primary: Colors.white),
+              child: Text(
+                'BACK TO SHOPPING',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ),
           ],
         ),
       ),
