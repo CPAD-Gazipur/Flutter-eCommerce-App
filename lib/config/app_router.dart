@@ -23,6 +23,8 @@ class AppRoute {
         return CheckoutScreen.route();
       case OrderConfirmationScreen.routeName:
         return OrderConfirmationScreen.route();
+      case PaymentSelectionScreen.routeName:
+        return PaymentSelectionScreen.route();
       default:
         return _errorRoute();
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/blocs.dart';
 import '../models/model.dart';
+import 'widgets.dart';
 
 class HomeNavBar extends StatelessWidget {
   const HomeNavBar({Key? key}) : super(key: key);
@@ -172,7 +173,11 @@ class OrderNowNavBar extends StatelessWidget {
                 );
               }
               if (state is CheckoutLoaded) {
-                return ElevatedButton(
+                return ApplePay(
+                  products: state.products!,
+                  total: state.total!,
+                );
+                /*return ElevatedButton(
                     onPressed: () {
                       context
                           .read<CheckoutBloc>()
@@ -186,7 +191,7 @@ class OrderNowNavBar extends StatelessWidget {
                     child: Text(
                       'ORDER NOW',
                       style: Theme.of(context).textTheme.headline3,
-                    ));
+                    ));*/
               } else {
                 return const Center(
                   child: Text('Something went wrong...'),
