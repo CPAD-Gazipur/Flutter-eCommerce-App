@@ -3,10 +3,10 @@ import 'package:pay/pay.dart';
 
 import '../models/model.dart';
 
-class ApplePay extends StatelessWidget {
+class GooglePay extends StatelessWidget {
   final List<Product> products;
   final String total;
-  const ApplePay({Key? key, required this.products, required this.total})
+  const GooglePay({Key? key, required this.products, required this.total})
       : super(key: key);
 
   @override
@@ -37,12 +37,12 @@ class ApplePay extends StatelessWidget {
 
     return SizedBox(
       width: MediaQuery.of(context).size.width - 50,
-      child: ApplePayButton(
-        paymentConfigurationAsset: 'default_payment_profile_apple_pay.json',
+      child: GooglePayButton(
+        paymentConfigurationAsset: 'default_payment_profile_google_pay.json',
         onPaymentResult: onApplePaymentResult,
         paymentItems: paymentItems,
-        style: ApplePayButtonStyle.white,
-        type: ApplePayButtonType.inStore,
+        style: GooglePayButtonStyle.white,
+        type: GooglePayButtonType.pay,
         margin: const EdgeInsets.only(top: 10),
         loadingIndicator:
             const Center(child: CircularProgressIndicator.adaptive()),

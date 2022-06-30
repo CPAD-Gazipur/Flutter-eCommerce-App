@@ -18,6 +18,7 @@ class UpdateCheckout extends CheckoutEvent {
   final String? deliveryFee;
   final String? total;
   final Cart? cart;
+  final PaymentMethod? paymentMethod;
 
   const UpdateCheckout({
     this.name,
@@ -30,6 +31,7 @@ class UpdateCheckout extends CheckoutEvent {
     this.deliveryFee,
     this.total,
     this.cart,
+    this.paymentMethod,
   });
 
   @override
@@ -44,6 +46,7 @@ class UpdateCheckout extends CheckoutEvent {
         deliveryFee,
         total,
         cart,
+        paymentMethod,
       ];
 }
 

@@ -2,24 +2,27 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-
+import 'package:flutter_ecommerce_app/bloc/blocs.dart';
 import '../../models/model.dart';
 import '../../repositories/repositories.dart';
-import '../cart/cart_bloc.dart';
 
 part 'checkout_event.dart';
 part 'checkout_state.dart';
 
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   final CartBloc _cartBloc;
+  final PaymentBloc _paymentBloc;
   final CheckoutRepository _checkoutRepository;
   StreamSubscription? _streamCartBlocSubscription;
+  StreamSubscription? _streamPaymentBlocSubscription;
   StreamSubscription? _streamCheckoutSubscription;
 
   CheckoutBloc({
     required CartBloc cartBloc,
+    required PaymentBloc paymentBloc,
     required CheckoutRepository checkoutRepository,
   })  : _cartBloc = cartBloc,
+        _paymentBloc = paymentBloc,
         _checkoutRepository = checkoutRepository,
         super(cartBloc.state is CartLoaded
             ? CheckoutLoaded(
@@ -39,6 +42,16 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         add(UpdateCheckout(cart: (state as CartLoaded).cart));
       }
     });
+
+    _streamPaymentBlocSubscription = _paymentBloc.stream.listen((state) {
+      if (state is PaymentLoaded) {
+        add(
+          UpdateCheckout(
+            paymentMethod: state.paymentMethod,
+          ),
+        );
+      }
+    });
   }
 
   void _onUpdateCheckout(event, Emitter<CheckoutState> emit) {
@@ -55,6 +68,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         deliveryFee: event.deliveryFee ?? state.deliveryFee,
         total: event.total ?? state.total,
         products: event.cart?.products ?? state.products,
+        paymentMethod: event.paymentMethod ?? state.paymentMethod,
       ));
     }
   }
@@ -67,5 +81,12 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         emit(CheckoutLoading());
       } catch (_) {}
     }
+  }
+
+  @override
+  Future<void> close() {
+    _streamCartBlocSubscription?.cancel();
+    _streamPaymentBlocSubscription?.cancel();
+    return super.close();
   }
 }

@@ -28,9 +28,11 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => WishlistBloc()..add(LoadWishList())),
         BlocProvider(create: (_) => CartBloc()..add(LoadCart())),
+        BlocProvider(create: (_) => PaymentBloc()..add(LoadPaymentMethod())),
         BlocProvider(
           create: (context) => CheckoutBloc(
             cartBloc: context.read<CartBloc>(),
+            paymentBloc: context.read<PaymentBloc>(),
             checkoutRepository: CheckoutRepository(),
           ),
         ),

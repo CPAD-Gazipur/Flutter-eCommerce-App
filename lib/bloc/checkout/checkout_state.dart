@@ -10,8 +10,6 @@ abstract class CheckoutState extends Equatable {
 class CheckoutLoading extends CheckoutState {}
 
 class CheckoutLoaded extends CheckoutState {
-  final Checkout checkout;
-
   final String? name;
   final String? email;
   final String? address;
@@ -22,19 +20,22 @@ class CheckoutLoaded extends CheckoutState {
   final String? deliveryFee;
   final String? total;
   final List<Product>? products;
+  final Checkout checkout;
+  final PaymentMethod paymentMethod;
 
-  CheckoutLoaded(
-      {this.name,
-      this.email,
-      this.address,
-      this.city,
-      this.country,
-      this.zipCode,
-      this.subTotal,
-      this.deliveryFee,
-      this.total,
-      this.products})
-      : checkout = Checkout(
+  CheckoutLoaded({
+    this.name,
+    this.email,
+    this.address,
+    this.city,
+    this.country,
+    this.zipCode,
+    this.subTotal,
+    this.deliveryFee,
+    this.total,
+    this.products,
+    this.paymentMethod = PaymentMethod.googlePay,
+  }) : checkout = Checkout(
           name: name,
           email: email,
           address: address,
@@ -59,5 +60,6 @@ class CheckoutLoaded extends CheckoutState {
         deliveryFee,
         total,
         products,
+        paymentMethod,
       ];
 }
