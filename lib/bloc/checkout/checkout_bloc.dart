@@ -31,8 +31,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
                 total: (cartBloc.state as CartLoaded).cart.totalPriceString,
               )
             : CheckoutLoading()) {
-    /* on<UpdateCheckout>(_onUpdateCheckout);
-    on<ConfirmCheckout>(_onConfirmCheckout);*/
+    on<UpdateCheckout>(_onUpdateCheckout);
+    on<ConfirmCheckout>(_onConfirmCheckout);
 
     _streamCartBlocSubscription = _cartBloc.stream.listen((event) {
       if (event is CartLoaded) {
@@ -41,23 +41,10 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     });
   }
 
-  @override
-  Stream<CheckoutState> mapEventToState(
-    CheckoutEvent event,
-  ) async* {
-    if (event is UpdateCheckout) {
-      yield* _mapUpdateCheckoutToState(event, state);
-    } else if (event is ConfirmCheckout) {
-      yield* _mapConfirmCheckoutToState(event, state);
-    }
-  }
-
-  Stream<CheckoutState> _mapUpdateCheckoutToState(
-    UpdateCheckout event,
-    CheckoutState state,
-  ) async* {
+  void _onUpdateCheckout(event, Emitter<CheckoutState> emit) {
+    final state = this.state;
     if (state is CheckoutLoaded) {
-      yield CheckoutLoaded(
+      emit(CheckoutLoaded(
         name: event.name ?? state.name,
         email: event.email ?? state.email,
         address: event.address ?? state.address,
@@ -68,19 +55,16 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         deliveryFee: event.deliveryFee ?? state.deliveryFee,
         total: event.total ?? state.total,
         products: event.cart?.products ?? state.products,
-      );
+      ));
     }
   }
 
-  Stream<CheckoutState> _mapConfirmCheckoutToState(
-    ConfirmCheckout event,
-    CheckoutState state,
-  ) async* {
+  void _onConfirmCheckout(event, Emitter<CheckoutState> emit) async {
     _streamCheckoutSubscription?.cancel();
     if (state is CheckoutLoaded) {
       try {
         await _checkoutRepository.addCheckout(event.checkout);
-        yield CheckoutLoading();
+        emit(CheckoutLoading());
       } catch (_) {}
     }
   }
