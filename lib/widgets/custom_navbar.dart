@@ -175,45 +175,28 @@ class OrderNowNavBar extends StatelessWidget {
                 );
               }
               if (state is CheckoutLoaded) {
-                if (Platform.isAndroid) {
-                  switch (state.paymentMethod) {
-                    case PaymentMethod.googlePay:
-                      return GooglePay(
-                        products: state.products!,
-                        total: state.total!,
-                      );
-                    case PaymentMethod.creditCard:
-                      return Container(
-                        child: Text(
-                          'Pay with Credit Card',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4!
-                              .copyWith(color: Colors.white),
-                        ),
-                      );
-                    default:
-                      return GooglePay(
-                        products: state.products!,
-                        total: state.total!,
-                      );
-                  }
+                if (state.paymentMethod == PaymentMethod.creditCard) {
+                  return Text(
+                    'Pay with Credit Card',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: Colors.white),
+                  );
                 }
-                if (Platform.isIOS) {
-                  switch (state.paymentMethod) {
-                    case PaymentMethod.applePay:
-                      return ApplePay(
-                        products: state.products!,
-                        total: state.total!,
-                      );
-                    case PaymentMethod.creditCard:
-                      return Container();
-                    default:
-                      return ApplePay(
-                        products: state.products!,
-                        total: state.total!,
-                      );
-                  }
+                if (Platform.isAndroid &&
+                    state.paymentMethod == PaymentMethod.googlePay) {
+                  return GooglePay(
+                    products: state.products!,
+                    total: state.total!,
+                  );
+                }
+                if (Platform.isIOS &&
+                    state.paymentMethod == PaymentMethod.applePay) {
+                  return ApplePay(
+                    products: state.products!,
+                    total: state.total!,
+                  );
                 } else {
                   return ElevatedButton(
                       onPressed: () {

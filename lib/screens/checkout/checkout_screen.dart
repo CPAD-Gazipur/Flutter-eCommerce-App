@@ -43,63 +43,63 @@ class CheckoutScreen extends StatelessWidget {
                   'CUSTOMER INFORMATION',
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(email: value));
                   },
                   context: context,
-                  labelText: 'Email',
+                  title: 'Email',
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(name: value));
                   },
                   context: context,
-                  labelText: 'Full name',
+                  title: 'Full name',
                 ),
                 Text(
                   'DELIVERY INFORMATION',
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(address: value));
                   },
                   context: context,
-                  labelText: 'Full Address',
+                  title: 'Full Address',
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(city: value));
                   },
                   context: context,
-                  labelText: 'City',
+                  title: 'City',
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(country: value));
                   },
                   context: context,
-                  labelText: 'Country',
+                  title: 'Country',
                 ),
-                _buildTextFromField(
+                CustomTextFromField(
                   onChanged: (value) {
                     context
                         .read<CheckoutBloc>()
                         .add(UpdateCheckout(zipCode: value));
                   },
                   context: context,
-                  labelText: 'Zip Code',
+                  title: 'Zip Code',
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -149,41 +149,6 @@ class CheckoutScreen extends StatelessWidget {
             );
           }
         }),
-      ),
-    );
-  }
-
-  Widget _buildTextFromField({
-    Function(String)? onChanged,
-    required BuildContext context,
-    required String labelText,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 75,
-            child: Text(
-              labelText,
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-          Expanded(
-            child: TextFormField(
-              onChanged: onChanged,
-              decoration: const InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.only(left: 20),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
