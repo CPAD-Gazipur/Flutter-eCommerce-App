@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_app/models/product_model.dart';
 import 'package:flutter_ecommerce_app/simple_bloc_observer.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'repositories/repositories.dart';
 import 'bloc/blocs.dart';
 import 'config/config.dart';
@@ -10,6 +12,8 @@ import 'screens/screens.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Hive.initFlutter();
+  Hive.registerAdapter(ProductAdapter());
   BlocOverrides.runZoned(
     () {
       runApp(const MyApp());
@@ -26,7 +30,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => WishlistBloc()..add(LoadWishList())),
+        BlocProvider(
+          create: (_) =>
+              WishlistBloc(localStorageRepository: LocalStorageRepository())
+                ..add(LoadWishList()),
+        ),
         BlocProvider(create: (_) => CartBloc()..add(LoadCart())),
         BlocProvider(create: (_) => PaymentBloc()..add(LoadPaymentMethod())),
         BlocProvider(
