@@ -13,7 +13,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,11 @@ class CartScreen extends StatelessWidget {
                       children: [
                         Text(
                           state.cart.freeDeliveryString,
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
+                              backgroundColor: Colors.black,
                               shape: const RoundedRectangleBorder(),
                               elevation: 0),
                           onPressed: () {
@@ -57,7 +57,7 @@ class CartScreen extends StatelessWidget {
                             'Add More Items',
                             style: Theme.of(context)
                                 .textTheme
-                                .headline5!
+                                .headlineSmall!
                                 .copyWith(color: Colors.white),
                           ),
                         ),

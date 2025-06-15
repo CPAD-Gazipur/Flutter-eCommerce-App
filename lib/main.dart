@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_app/simple_bloc_observer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'models/model.dart';
-import 'repositories/repositories.dart';
+
 import 'bloc/blocs.dart';
 import 'config/config.dart';
+import 'models/model.dart';
+import 'repositories/repositories.dart';
 import 'screens/screens.dart';
 
 Future<void> main() async {
@@ -14,18 +15,13 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductAdapter());
-  BlocOverrides.runZoned(
-    () {
-      runApp(const MyApp());
-    },
-    blocObserver: SimpleBlocObserver(),
-  );
+  Bloc.observer = SimpleBlocObserver();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(

@@ -7,7 +7,7 @@ import 'package:flutter_ecommerce_app/models/model.dart';
 import 'package:flutter_ecommerce_app/widgets/widgets.dart';
 import 'package:pay/pay.dart';
 
-class PaymentSelectionScreen extends StatelessWidget {
+class PaymentSelectionScreen extends StatefulWidget {
   static const String routeName = '/payment-selection';
   static Route route() {
     return MaterialPageRoute(
@@ -16,7 +16,26 @@ class PaymentSelectionScreen extends StatelessWidget {
     );
   }
 
-  const PaymentSelectionScreen({Key? key}) : super(key: key);
+  const PaymentSelectionScreen({super.key});
+
+  @override
+  State<PaymentSelectionScreen> createState() => _PaymentSelectionScreenState();
+}
+
+class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
+  late PaymentConfiguration _paymentConfig;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializePaymentConfig();
+  }
+
+  Future<void> _initializePaymentConfig() async {
+    _paymentConfig = await PaymentConfiguration.fromAsset(
+      'default_payment_profile_google_pay.json',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +78,9 @@ class PaymentSelectionScreen extends StatelessWidget {
                             );
                         Navigator.pop(context);
                       },
-                      style: GooglePayButtonStyle.black,
+                      theme: GooglePayButtonTheme.dark,
                       type: GooglePayButtonType.pay,
+                      paymentConfiguration: _paymentConfig,
                     )
                   : const SizedBox(),
               const SizedBox(height: 10),
@@ -73,7 +93,7 @@ class PaymentSelectionScreen extends StatelessWidget {
                       );
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(primary: Colors.black),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
                 child: const Text('Pay with CreditCard'),
               ),
             ],

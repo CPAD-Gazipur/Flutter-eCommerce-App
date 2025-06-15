@@ -13,7 +13,7 @@ class OrderConfirmationScreen extends StatelessWidget {
     );
   }
 
-  const OrderConfirmationScreen({Key? key}) : super(key: key);
+  const OrderConfirmationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class OrderConfirmationScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .headline3!
+                        .displaySmall!
                         .copyWith(color: Colors.white),
                   ),
                 ),
@@ -58,23 +58,23 @@ class OrderConfirmationScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Hi Maria,',
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 10),
                   Text(
                     'Thank you for purchasing on Flutter e-Commerce App',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: 20),
                   Text(
                     'ORDER CODE: #0EFR30',
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const OrderSummary(),
                   const SizedBox(height: 20),
                   Text(
                     'ORDER DETAILS',
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const Divider(thickness: 2),
                   const SizedBox(height: 5),

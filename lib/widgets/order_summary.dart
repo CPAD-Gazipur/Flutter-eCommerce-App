@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/blocs.dart';
 
 class OrderSummary extends StatelessWidget {
-  const OrderSummary({
-    Key? key,
-  }) : super(key: key);
+  const OrderSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +30,11 @@ class OrderSummary extends StatelessWidget {
                     children: [
                       Text(
                         'SUBTOTAL',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
                         '\$${state.cart.subTotalPriceString}',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
                   ),
@@ -46,11 +44,11 @@ class OrderSummary extends StatelessWidget {
                     children: [
                       Text(
                         'DELIVERY FEE',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
                         '\$${state.cart.deliveryFeeString}',
-                        style: Theme.of(context).textTheme.headline5,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     ],
                   ),
@@ -82,14 +80,14 @@ class OrderSummary extends StatelessWidget {
                           'TOTAL',
                           style: Theme.of(context)
                               .textTheme
-                              .headline5!
+                              .headlineSmall!
                               .copyWith(color: Colors.white),
                         ),
                         Text(
                           '\$${state.cart.totalPriceString}',
                           style: Theme.of(context)
                               .textTheme
-                              .headline5!
+                              .headlineSmall!
                               .copyWith(color: Colors.white),
                         ),
                       ],

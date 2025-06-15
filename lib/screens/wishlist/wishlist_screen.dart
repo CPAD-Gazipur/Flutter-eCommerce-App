@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../bloc/blocs.dart';
 import '../../widgets/widgets.dart';
 
@@ -12,7 +13,7 @@ class WishListScreen extends StatelessWidget {
     );
   }
 
-  const WishListScreen({Key? key}) : super(key: key);
+  const WishListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +45,14 @@ class WishListScreen extends StatelessWidget {
                     ),
                     Text(
                       'No Item in you Wishlist',
-                      style: Theme.of(context).textTheme.bodyText1!,
+                      style: Theme.of(context).textTheme.bodyLarge!,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.black),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black),
                       onPressed: () {
                         Navigator.pushNamed(context, '/');
                       },

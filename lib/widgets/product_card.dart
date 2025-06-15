@@ -6,7 +6,7 @@ import '../models/model.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard.catalog({
-    Key? key,
+    super.key,
     required this.product,
     this.quantity,
     this.widthFactor = 2.25,
@@ -17,10 +17,10 @@ class ProductCard extends StatelessWidget {
     this.isSummary = false,
     this.iconColor = Colors.white,
     this.fontColor = Colors.white,
-  }) : super(key: key);
+  });
 
   const ProductCard.wishlist({
-    Key? key,
+    super.key,
     required this.product,
     this.quantity,
     this.widthFactor = 1.1,
@@ -31,10 +31,10 @@ class ProductCard extends StatelessWidget {
     this.isSummary = false,
     this.iconColor = Colors.white,
     this.fontColor = Colors.white,
-  }) : super(key: key);
+  });
 
   const ProductCard.cart({
-    Key? key,
+    super.key,
     required this.product,
     this.quantity,
     this.widthFactor = 2.25,
@@ -45,10 +45,10 @@ class ProductCard extends StatelessWidget {
     this.isSummary = false,
     this.iconColor = Colors.black,
     this.fontColor = Colors.black,
-  }) : super(key: key);
+  });
 
   const ProductCard.summary({
-    Key? key,
+    super.key,
     required this.product,
     this.quantity,
     this.widthFactor = 2.25,
@@ -59,7 +59,7 @@ class ProductCard extends StatelessWidget {
     this.isSummary = true,
     this.iconColor = Colors.black,
     this.fontColor = Colors.black,
-  }) : super(key: key);
+  });
 
   final Product product;
   final int? quantity;
@@ -92,7 +92,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: Colors.grey.withValues(alpha: 10),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -156,11 +156,11 @@ class ProductCard extends StatelessWidget {
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
-    Key? key,
+    super.key,
     required this.adjWidth,
     required this.height,
     required this.product,
-  }) : super(key: key);
+  });
 
   final double adjWidth;
   final double height;
@@ -181,12 +181,12 @@ class ProductImage extends StatelessWidget {
 
 class ProductInformation extends StatelessWidget {
   const ProductInformation({
-    Key? key,
+    super.key,
     required this.product,
     required this.fontColor,
     this.isOrderSummary = false,
     this.quantity,
-  }) : super(key: key);
+  });
 
   final Product product;
   final Color fontColor;
@@ -209,7 +209,7 @@ class ProductInformation extends StatelessWidget {
                 maxLines: 1,
                 style: Theme.of(context)
                     .textTheme
-                    .headline5!
+                    .headlineSmall!
                     .copyWith(color: fontColor),
               ),
             ),
@@ -217,7 +217,7 @@ class ProductInformation extends StatelessWidget {
               '\$${product.price}',
               style: Theme.of(context)
                   .textTheme
-                  .headline6!
+                  .titleLarge!
                   .copyWith(color: fontColor),
             ),
           ],
@@ -227,7 +227,7 @@ class ProductInformation extends StatelessWidget {
                 'Qty. $quantity',
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .headlineMedium!
                     .copyWith(color: fontColor),
               )
             : const SizedBox(),
@@ -238,14 +238,14 @@ class ProductInformation extends StatelessWidget {
 
 class ProductActions extends StatelessWidget {
   const ProductActions({
-    Key? key,
+    super.key,
     required this.product,
     required this.isCatalog,
     required this.isWishlist,
     required this.isCart,
     required this.iconColor,
     this.quantity,
-  }) : super(key: key);
+  });
 
   final Product product;
   final bool isCatalog;
@@ -311,7 +311,7 @@ class ProductActions extends StatelessWidget {
 
           Text productQuantity = Text(
             '$quantity',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headlineMedium,
           );
 
           if (isCatalog) {
@@ -333,10 +333,10 @@ class ProductActions extends StatelessWidget {
 
 class ProductBackground extends StatelessWidget {
   const ProductBackground({
-    Key? key,
+    super.key,
     required this.adjWidth,
     required this.widgets,
-  }) : super(key: key);
+  });
 
   final double adjWidth;
   final List<Widget> widgets;

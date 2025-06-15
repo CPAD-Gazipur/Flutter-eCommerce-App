@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar({super.key, required this.title, this.isWishList = false});
+
   final String title;
   final bool isWishList;
-  const CustomAppBar({Key? key, required this.title, this.isWishList = false})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           title,
           style: Theme.of(context)
               .textTheme
-              .headline2!
+              .displayMedium!
               .copyWith(color: Colors.white),
         ),
       ),
@@ -34,15 +34,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, '/wishlist');
                 },
-                icon: const Icon(
-                  Icons.favorite,
-                ),
+                icon: const Icon(Icons.favorite),
               ),
       ],
     );
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(50);
 }

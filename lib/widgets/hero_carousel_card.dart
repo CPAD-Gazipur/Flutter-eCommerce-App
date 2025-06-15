@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../extension/extension.dart';
 import '../models/model.dart';
 
@@ -7,10 +8,10 @@ class HeroCarouselCard extends StatelessWidget {
   final Product? product;
 
   const HeroCarouselCard({
-    Key? key,
+    super.key,
     this.category,
     this.product,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class HeroCarouselCard extends StatelessWidget {
                       product == null ? category!.name.toCapitalized() : '',
                       style: Theme.of(context)
                           .textTheme
-                          .headline2!
+                          .displayMedium!
                           .copyWith(color: Colors.white),
                     ),
                   ),

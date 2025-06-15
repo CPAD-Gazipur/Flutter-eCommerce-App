@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../bloc/blocs.dart';
 import '../models/model.dart';
 import 'widgets.dart';
 
 class HomeNavBar extends StatelessWidget {
-  const HomeNavBar({Key? key}) : super(key: key);
+  const HomeNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +56,9 @@ class HomeNavBar extends StatelessWidget {
 
 class AddToCartNavBar extends StatelessWidget {
   const AddToCartNavBar({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   final Product product;
 
@@ -111,10 +112,11 @@ class AddToCartNavBar extends StatelessWidget {
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   child: Text(
                     'ADD TO CART',
-                    style: Theme.of(context).textTheme.headline3,
+                    style: Theme.of(context).textTheme.displaySmall,
                   ));
             })
           ],
@@ -125,9 +127,7 @@ class AddToCartNavBar extends StatelessWidget {
 }
 
 class GoToCheckoutNavBar extends StatelessWidget {
-  const GoToCheckoutNavBar({
-    Key? key,
-  }) : super(key: key);
+  const GoToCheckoutNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -139,14 +139,15 @@ class GoToCheckoutNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/checkout');
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                child: Text(
-                  'GO TO CHECKOUT',
-                  style: Theme.of(context).textTheme.headline3,
-                ))
+              onPressed: () {
+                Navigator.pushNamed(context, '/checkout');
+              },
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+              child: Text(
+                'GO TO CHECKOUT',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+            )
           ],
         ),
       ),
@@ -155,9 +156,7 @@ class GoToCheckoutNavBar extends StatelessWidget {
 }
 
 class OrderNowNavBar extends StatelessWidget {
-  const OrderNowNavBar({
-    Key? key,
-  }) : super(key: key);
+  const OrderNowNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +179,7 @@ class OrderNowNavBar extends StatelessWidget {
                     'Pay with Credit Card',
                     style: Theme.of(context)
                         .textTheme
-                        .headline4!
+                        .headlineMedium!
                         .copyWith(color: Colors.white),
                   );
                 }
@@ -199,18 +198,20 @@ class OrderNowNavBar extends StatelessWidget {
                   );
                 } else {
                   return ElevatedButton(
-                      onPressed: () {
-                        context
-                            .read<CheckoutBloc>()
-                            .add(ConfirmCheckout(checkout: state.checkout));
+                    onPressed: () {
+                      context
+                          .read<CheckoutBloc>()
+                          .add(ConfirmCheckout(checkout: state.checkout));
 
-                        Navigator.pushNamed(context, '/payment-selection');
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.white),
-                      child: Text(
-                        'CHOOSE PAYMENT',
-                        style: Theme.of(context).textTheme.headline3,
-                      ));
+                      Navigator.pushNamed(context, '/payment-selection');
+                    },
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                    child: Text(
+                      'CHOOSE PAYMENT',
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                  );
                 }
               } else {
                 return const Center(
@@ -226,9 +227,7 @@ class OrderNowNavBar extends StatelessWidget {
 }
 
 class BackToShoppingNavBar extends StatelessWidget {
-  const BackToShoppingNavBar({
-    Key? key,
-  }) : super(key: key);
+  const BackToShoppingNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -243,10 +242,10 @@ class BackToShoppingNavBar extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/');
               },
-              style: ElevatedButton.styleFrom(primary: Colors.white),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
               child: Text(
                 'BACK TO SHOPPING',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
             ),
           ],

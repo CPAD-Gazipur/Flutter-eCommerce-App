@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
 import '../../models/model.dart';
 import '../../widgets/widgets.dart';
 
@@ -15,7 +16,7 @@ class ProductScreen extends StatelessWidget {
   }
 
   final Product product;
-  const ProductScreen({Key? key, required this.product}) : super(key: key);
+  const ProductScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +59,14 @@ class ProductScreen extends StatelessWidget {
                           product.name,
                           style: Theme.of(context)
                               .textTheme
-                              .headline5!
+                              .headlineSmall!
                               .copyWith(color: Colors.white),
                         ),
                         Text(
                           '\$${product.price}',
                           style: Theme.of(context)
                               .textTheme
-                              .headline5!
+                              .headlineSmall!
                               .copyWith(color: Colors.white),
                         )
                       ],
@@ -81,14 +82,14 @@ class ProductScreen extends StatelessWidget {
               initiallyExpanded: true,
               title: Text(
                 'Product Information',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               childrenPadding:
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               children: [
                 Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.justify,
                 ),
               ],
@@ -99,14 +100,14 @@ class ProductScreen extends StatelessWidget {
             child: ExpansionTile(
               title: Text(
                 'Delivery Information',
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               childrenPadding:
                   const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               children: [
                 Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                   textAlign: TextAlign.justify,
                 ),
               ],

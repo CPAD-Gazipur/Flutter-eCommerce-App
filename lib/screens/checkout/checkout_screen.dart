@@ -13,7 +13,7 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  const CheckoutScreen({Key? key}) : super(key: key);
+  const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CheckoutScreen extends StatelessWidget {
               children: [
                 Text(
                   'CUSTOMER INFORMATION',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
                 CustomTextFromField(
                   onChanged: (value) {
@@ -63,7 +63,7 @@ class CheckoutScreen extends StatelessWidget {
                 ),
                 Text(
                   'DELIVERY INFORMATION',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
                 CustomTextFromField(
                   onChanged: (value) {
@@ -117,7 +117,7 @@ class CheckoutScreen extends StatelessWidget {
                           'SELECT PAYMENT METHOD',
                           style: Theme.of(context)
                               .textTheme
-                              .headline3!
+                              .displaySmall!
                               .copyWith(color: Colors.white),
                         ),
                         onPressed: () {
@@ -138,7 +138,7 @@ class CheckoutScreen extends StatelessWidget {
                 ),
                 Text(
                   'ORDER SUMMARY',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
                 const OrderSummary(),
               ],
